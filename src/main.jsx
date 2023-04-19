@@ -10,9 +10,7 @@ import Info from "./routes/Info";
 import Product, { productAction } from "./routes/Product"
 import Index from "./routes/Index";
 import ProductOverview from "./routes/ProductOverview";
-import CatPicture, { catPictureLoader } from "./routes/CatPicture";
-import CatPictures, { catPicturesLoader } from "./routes/CatPictures";
-import CatPictureError from "./routes/CatPictureError";
+import Titles, { titlesLoader } from "./routes/Titles";
 import Error from "./routes/Error";
 
 
@@ -31,24 +29,23 @@ const router = createBrowserRouter([
         element: <Info />,
       },
       {
-        path: "product/:productId",
-        element: <Product />,
-        action: productAction,
+        path: "product",
+        children: [
+          { 
+            index: true,
+            element: <ProductOverview />
+          },
+          {
+            path: ":productId",
+            element: <Product />,
+            action: productAction,
+          },
+        ]
       },
       {
-        path: "product/",
-        element: <ProductOverview />,
-      },
-      {
-        path: "catPicture/:catPictureId",
-        element: <CatPicture />,
-        loader: catPictureLoader,
-        errorElement: <CatPictureError />,
-      },
-      {
-        path: "catPictures/",
-        element: <CatPictures />,
-        loader: catPicturesLoader
+        path: "titles",
+        element: <Titles />,
+        loader: titlesLoader
       },
     ]
   },

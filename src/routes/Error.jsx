@@ -6,6 +6,7 @@ export default function Error() {
     return (
       <div className="error">
         <h1>Allgemeine Fehlermeldung</h1>
+        <p>{error.message}</p>
       </div>
     );
 }
